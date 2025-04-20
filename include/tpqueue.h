@@ -11,52 +11,53 @@ class TPQueue {
   T data;
   Node* next;
   explicit Node(T data) : data(data), next(nullptr) {}
-  Node* start;
-  Node* end;
 };
+  Node* head;
+  Node* tail;
+
  public:
-    TPQueue() : start(nullptr), end(nullptr) {}
+    TPQueue() : head(nullptr), tail(nullptr) {}
     ~TPQueue() {
-        while (start) {
-            Node* temp = start;
-            start = start->next;
+        while (head) {
+            Node* temp = head;
+            head = head->next;
             delete temp;
         }
     }
 
     void push(T item) {
         Node* newNode = new Node(item);
-        if (!start || item.prior > start->data.prior) {
-            newNode->next = start;
-            start = newNode;
-            if (!end) end = start;
+        if (!head || item.prior > head->data.prior) {
+            newNode->next = head;
+            head = newNode;
+            if (!tail) tail = head;
             return;
         }
-        Node* current = start;
+        Node* current = head;
         while (current->next && current->next->data.prior >= item.prior) {
             current = current->next;
         }
         newNode->next = current->next;
         current->next = newNode;
         if (!newNode->next) {
-            end = newNode;
+            tail = newNode;
         }
     }
     T pop() {
-        if (!start) {
+        if (!head) {
             throw std::runtime_error("Очередь пуста!");
         }
-        Node* temp = start;
+        Node* temp = head;
         T result = temp->data;
-        start = start->next;
-        if (!start) {
-            end = nullptr;
+        head = head->next;
+        if (!head) {
+            tail = nullptr;
         }
         delete temp;
         return result;
     }
     bool isEmpty() const {
-        return start == nullptr;
+        return head == nullptr;
     }
 };
 
