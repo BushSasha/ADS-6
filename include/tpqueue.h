@@ -11,11 +11,10 @@ class TPQueue {
   T data;
   Node* next;
   explicit Node(T data) : data(data), next(nullptr) {}
+  Node* start;
+  Node* end;
 };
-  Node<T>* start;
-  Node<T>* end;
-
-public:
+ public:
     TPQueue() : start(nullptr), end(nullptr) {}
     ~TPQueue() {
         while (start) {
