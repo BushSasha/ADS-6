@@ -11,7 +11,7 @@ class TPQueue {
   T data;
   Node* next;
   explicit Node(T data) : data(data), next(nullptr) {}
-};
+  };
   Node* head;
   Node* tail;
 
