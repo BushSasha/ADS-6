@@ -7,12 +7,12 @@ template<typename T>
 struct Node {
 T data;
 Node* next;
-Node (const T& data) : data(data), next(nullptr) {}
+Node(const T& data) : data(data), next(nullptr) {}
 };
 
 template<typename T>
 class TPQueue {
-private:
+ private:
   Node<T>* start;
   Node<T>* end;
 };
@@ -40,7 +40,6 @@ public:
         }
         newNode->next = current->next;
         current->next = newNode;
-        
         if (!newNode->next) {
             end = newNode;
         }
@@ -52,7 +51,6 @@ public:
         Node<T>* temp = start;
         T result = temp->data;
         start = start->next;
-        
         if (!start) {
             end = nullptr;
         }
