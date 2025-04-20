@@ -2,17 +2,16 @@
 #ifndef INCLUDE_TPQUEUE_H_
 #define INCLUDE_TPQUEUE_H_
 #pragma once
-
-template<typename T>
-struct Node {
-T data;
-Node* next;
-Node(const T& data) : data(data), next(nullptr) {}
-};
+#include <stdexcept>
 
 template<typename T>
 class TPQueue {
  private:
+ struct Node {
+ T data;
+ Node* next;
+ Node(const T& data) : data(data), next(nullptr) {}
+};
   Node<T>* start;
   Node<T>* end;
 };
