@@ -7,33 +7,33 @@
 template<typename T>
 class TPQueue {
  private:
- struct Node {
- T data;
- Node* next;
- Node(const T& data) : data(data), next(nullptr) {}
+  struct Node {
+  T data;
+  Node* next;
+  explicit Node(T data) : data(data), next(nullptr) {}
 };
   Node<T>* start;
   Node<T>* end;
-};
+
 public:
     TPQueue() : start(nullptr), end(nullptr) {}
     ~TPQueue() {
         while (start) {
-            Node<T>* temp = start;
+            Node* temp = start;
             start = start->next;
             delete temp;
         }
     }
 
-    void push(const T& item) {
-        Node<T>* newNode = new Node<T>(item);
+    void push(T item) {
+        Node* newNode = new Node(item);
         if (!start || item.prior > start->data.prior) {
             newNode->next = start;
             start = newNode;
             if (!end) end = start;
             return;
         }
-        Node<T>* current = start;
+        Node* current = start;
         while (current->next && current->next->data.prior >= item.prior) {
             current = current->next;
         }
@@ -47,7 +47,7 @@ public:
         if (!start) {
             throw std::runtime_error("Очередь пуста!");
         }
-        Node<T>* temp = start;
+        Node* temp = start;
         T result = temp->data;
         start = start->next;
         if (!start) {
